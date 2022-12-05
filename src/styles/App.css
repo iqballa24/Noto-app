@@ -4,13 +4,13 @@
 @tailwind utilities;
 
 :root {
-  --font-color: #333;
-  --background-color: #eee;
+  --font-color: #ffffff;
+  --background-color: #34363f;
 }
 
-[data-theme="dark"] {
-  --font-color: #eee;
-  --background-color: #333;
+[data-theme="light"] {
+  --font-color: #5d5e67;
+  --background-color: #ececec;
 }
 
 * {
@@ -20,16 +20,13 @@
   transition: background 0.3s ease-in;
 }
 
+header {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Nunito", sans-serif;
   background-color: var(--background-color);
   color: var(--font-color);
-}
-
-#root {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
