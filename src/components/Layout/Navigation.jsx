@@ -1,20 +1,20 @@
 import React from "react";
-import ListMenu from "../ListMenu";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
-import { menus } from "../../constant";
 import { AiTwotoneSetting, AiOutlineMenu } from "react-icons/ai";
+
+import ListMenu from "../ListMenu";
+import { menus } from "../../constant";
 
 const Navigation = ({ onToggleNav, widthScreen }) => {
   return (
     <motion.nav
       initial={{ width: 0 }}
-      animate={{ width: 300 }}
+      animate={{ width: 280 }}
       exit={{
         opacity: 0,
-        transition: { duration: 0.3 },
       }}
-      className="absolute flex flex-col inset-0 w-[280px] px-4 bg-dark h-[100vh] text-sm md:text-base"
+      className="absolute flex flex-col inset-0 px-4 bg-dark h-[100vh] text-sm md:relative md:text-base"
     >
       <section className="flex flex-row items-center justify-between text-center pt-6 pb-8">
         <div className="flex flex-row items-center">
@@ -58,7 +58,7 @@ const Navigation = ({ onToggleNav, widthScreen }) => {
 };
 
 Navigation.propTypes = {
-  onToggleNav: PropTypes.func.isRequired,
+  onToggleNav: PropTypes.func,
   widthScreen: PropTypes.number.isRequired,
 };
 

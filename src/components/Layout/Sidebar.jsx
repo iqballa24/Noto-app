@@ -1,24 +1,25 @@
 import React from "react";
-import Header from "./Header";
 import Navigation from "./Navigation";
-import { AnimatePresence, useCycle } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import useWindowDimensions from "../../hooks/useWindowDimensions ";
+import PropTypes from "prop-types";
 
-const Sidebar = () => {
+const Sidebar = ({ open, cycleOpen }) => {
   const { width } = useWindowDimensions();
-  const [open, cycleOpen] = useCycle(false, true);
 
   return (
-    <aside className="flex flex-col w-full relative bg-dark-secondary">
-      <Header toggleSideNave={cycleOpen} />
+    <aside className="flex flex-col relative bg-dark-secondary">
       <AnimatePresence>
-        {width >= 768 && (
-          <Navigation onToggleNav={cycleOpen} widthScreen={width} />
-        )}
+        {width >= 768 && <Navigation widthScreen={width} />}
         {open && <Navigation onToggleNav={cycleOpen} widthScreen={width} />}
       </AnimatePresence>
     </aside>
   );
+};
+
+Sidebar.propTypes = {
+  open: PropTypes.bool.isRequired,
+  cycleOpen: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

@@ -30,3 +30,9 @@ body {
   background-color: var(--background-color);
   color: var(--font-color);
 }
+
+#root{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
