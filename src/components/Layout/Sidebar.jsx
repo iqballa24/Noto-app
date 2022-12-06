@@ -8,7 +8,7 @@ const Sidebar = ({ open, cycleOpen }) => {
   const { width } = useWindowDimensions();
 
   return (
-    <aside className="flex flex-col relative bg-dark-secondary">
+    <aside className="flex flex-col relative bg-dark-secondary z-10">
       <AnimatePresence>
         {width >= 768 && <Navigation widthScreen={width} />}
         {open && <Navigation onToggleNav={cycleOpen} widthScreen={width} />}
