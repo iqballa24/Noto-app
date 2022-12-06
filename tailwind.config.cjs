@@ -28,12 +28,19 @@ module.exports = {
         white: "#FFFFFF",
         "light-gray": "#8D9094",
         "dark-gray": "#5D5E67",
-        cyan: "#3FCFCF",
+        cyan: {
+          DEFAULT: "#3FCFCF",
+        },
         red: {
-          DEFAULT: "#BF3434",
+          DEFAULT: "#F03636 ",
           soft: "#F35252",
         },
       },
+    },
+  },
+  variants: {
+    extend: {
+      display: ["group-hover"],
     },
   },
   plugins: [],

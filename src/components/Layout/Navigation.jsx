@@ -1,25 +1,29 @@
 import React from "react";
-import ListMenu from "../ListMenu";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
-import { menus } from "../../constant";
+import { NavLink } from "react-router-dom";
 import { AiTwotoneSetting, AiOutlineMenu } from "react-icons/ai";
+import { menus } from "../../constant";
 
 const Navigation = ({ onToggleNav, widthScreen }) => {
+  const classNavLink =
+    "grid grid-flow-col auto-cols-max gap-6 pl-5 py-3 mb-5 cursor-pointer hover:text-cyan";
+  const active =
+    "text-cyan bg-gradient-to-r from-[#43444b] to-[#41444e] rounded-lg border-b border-cyan";
+
   return (
     <motion.nav
       initial={{ width: 0 }}
-      animate={{ width: 300 }}
-      exit={{
-        opacity: 0,
-        transition: { duration: 0.3 },
-      }}
-      className="absolute flex flex-col inset-0 w-[280px] px-4 bg-dark h-[100vh] text-sm md:text-base"
+      animate={{ width: 280 }}
+      exit={{ opacity: 0 }}
+      className="absolute flex flex-col inset-0 px-4 bg-dark h-[100vh] text-sm md:relative md:text-base"
     >
-      <section className="flex flex-row items-center justify-between text-center pt-6 pb-8">
+      <section className="flex flex-row items-center justify-between text-center pt-6 pb-8 md:justify-center">
         <div className="flex flex-row items-center">
-          <img src="./LOGO.svg" alt="logo" />
-          <span className="font-bold text-xl ml-2">ノート</span>
+          <img src="/LOGO.svg" alt="logo" className="w-full max-w-[38px]" />
+          <span className="font-bold text-xl ml-2 whitespace-nowrap">
+            ノート
+          </span>
         </div>
         {widthScreen < 768 && (
           <AiOutlineMenu
@@ -29,10 +33,27 @@ const Navigation = ({ onToggleNav, widthScreen }) => {
           />
         )}
       </section>
-      <ListMenu data={menus} />
+      <ul className="flex flex-col transition-all ease-in">
+        {menus.map((item) => (
+          <li key={item.id} title={item.name}>
+            <NavLink
+              to={item.path}
+              className={({ isActive }) =>
+                isActive ? `${classNavLink} ${active}` : `${classNavLink}`
+              }
+            >
+              <item.icon size={20} />
+              {item.name}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
       <section className="relative h-full">
         <ul className="flex flex-col absolute bottom-0 w-full">
-          <li className="grid grid-flow-col auto-cols-max gap-6 pl-5 py-3 cursor-pointer hover:text-cyan">
+          <li
+            className="grid grid-flow-col auto-cols-max gap-6 pl-5 py-3 cursor-pointer hover:text-cyan"
+            title="setting"
+          >
             <AiTwotoneSetting size={20} />
             Setting
           </li>
@@ -41,6 +62,7 @@ const Navigation = ({ onToggleNav, widthScreen }) => {
               <img
                 src="https://ui-avatars.com/api/?name=iqbal&amp;background=random"
                 alt="avatar"
+                width="100%"
                 className="rounded-full w-[44px]"
               />
             </div>
@@ -58,7 +80,7 @@ const Navigation = ({ onToggleNav, widthScreen }) => {
 };
 
 Navigation.propTypes = {
-  onToggleNav: PropTypes.func.isRequired,
+  onToggleNav: PropTypes.func,
   widthScreen: PropTypes.number.isRequired,
 };
 
