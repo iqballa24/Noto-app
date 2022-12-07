@@ -17,8 +17,8 @@ const DetailNote = () => {
         <h1 className="text-2xl md:text-3xl font-bold py-5 capitalize">
           explore design system
         </h1>
-        <p className="text-xs md:text-sm font-light text-light-secondary">Sunday, 24 March 2023</p>
-        <p className="text-sm md:text-base pt-7 text-light-secondary leading-7 indent-10">
+        <p className="text-xs md:text-sm font-light ">Sunday, 24 March 2023</p>
+        <p className="text-sm md:text-base pt-7  leading-7 indent-10">
           Dolor sit amet, consectetur adipiscing elit. Ut massa odio, imperdiet
           id efficitur eu, hendrerit a ex. Suspendisse mi augue, euismod eget
           semper ac, laoreet in elit. Vestibulum eget libero quis tortor

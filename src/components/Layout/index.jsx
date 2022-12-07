@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
     <>
       <Header toggleSideNave={cycleOpen} />
       <Sidebar open={open} cycleOpen={cycleOpen} />
-      <main className="w-full p-5 pt-20 h-[100vh] overflow-y-scroll scrollbar-hide md:px-10 md:py-5">{children}</main>
+      <main className="w-full p-5 pt-20 h-[100vh] overflow-y-scroll scrollbar-hide md:px-10 md:py-5 bg-light-secondary dark:bg-dark-secondary text-dark-gray dark:text-white">{children}</main>
     </>
   );
 };

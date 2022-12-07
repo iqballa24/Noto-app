@@ -26,12 +26,12 @@ const AddNote = () => {
           onChange={changeHandlerValueTitle}
         />
         <div
-          className="w-full min-h-[400px] bg-transparent border text-sm md:text-base"
+          className="w-full min-h-[400px] rounded-md text-sm md:text-base border border-dark-secondary dark:border-white p-5"
           contentEditable
           onInput={inputHandlerBody}
         ></div>
-        <div className="flex flex-row justify-between items-center">
-          <Button type="button" text="back" title="back" isDanger>
+        <div className="flex flex-row justify-between items-center px-2">
+          <Button type="button" text="back" title="back" isTransparant>
             <IoChevronBack />
             <p>Back</p>
           </Button>
