@@ -8,7 +8,7 @@ const NoteItem = ({ id, titleNote, textNote, dateNote }) => {
     <div className="relative flex flex-col bg-white dark:bg-dark p-5 rounded-lg md:p-8 hover:border hover:border-cyan">
       <div className="flex flex-row justify-between items-center pb-4">
         <Link
-          to={`/detail-note/${id}`}
+          to={`/detail-notes/${id}`}
           className="text-base md:text-lg font-bold cursor-pointer"
         >
           {titleNote}

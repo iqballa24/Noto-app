@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { menus } from "../../../constant";
+import PropTypes from "prop-types";
 
-const MainNavigation = () => {
+const MainNavigation = ({ currentLanguage }) => {
   const classNavLink =
     "grid grid-flow-col auto-cols-max gap-6 pl-5 py-3 mb-5 cursor-pointer hover:text-cyan";
   const active =
@@ -11,7 +12,7 @@ const MainNavigation = () => {
   return (
     <ul className="flex flex-col transition-all ease-in">
       {menus.map((item) => (
-        <li key={item.id} title={item.name}>
+        <li key={item.id} title={item.name[currentLanguage]}>
           <NavLink
             to={item.path}
             className={({ isActive }) =>
@@ -19,12 +20,16 @@ const MainNavigation = () => {
             }
           >
             <item.icon size={20} />
-            {item.name}
+            {item.name[currentLanguage]}
           </NavLink>
         </li>
       ))}
     </ul>
   );
+};
+
+MainNavigation.propTypes = {
+  currentLanguage: PropTypes.string.isRequired,
 };
 
 export default React.memo(MainNavigation);

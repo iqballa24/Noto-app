@@ -9,6 +9,7 @@ const Button = ({
   isPrimary,
   isDanger,
   isTransparant,
+  onClick,
 }) => {
   const className = [
     "flex flex-row text-sm items-center space-x-1 px-3 py-3 rounded-lg md:text-base md:px-4",
@@ -23,6 +24,7 @@ const Button = ({
       type={type}
       className={className.join(" ")}
       title={title}
+      onClick={onClick}
     >
       {children}
     </motion.button>
@@ -34,6 +36,7 @@ Button.propTypes = {
     .isRequired,
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   isPrimary: PropTypes.bool,
   isDanger: PropTypes.bool,
   isTransparant: PropTypes.bool,

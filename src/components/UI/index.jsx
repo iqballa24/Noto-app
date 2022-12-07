@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import EmptyState from "./EmptyState";
 import MoreOptions from "./MoreOption";
 import ModalSetting from "./Modal/ModalSetting";
+import ModalConfirm from "./Modal/ModalConfirm";
 import ButtonSwitch from "./Button/ButtonSwitch";
 
 export {
@@ -13,5 +14,6 @@ export {
   EmptyState,
   MoreOptions,
   ModalSetting,
+  ModalConfirm,
   ButtonSwitch,
 };

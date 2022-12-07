@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoChevronBack } from "react-icons/io5";
 import { Button, MoreOptions } from "../components/UI";
 import WrapperPages from "../components/WrapperPages";
+import ThemeContext from "../store/theme-context";
+import { buttonLang } from "../constant";
 
 const DetailNote = () => {
+  const { currentLanguage } = useContext(ThemeContext);
+  `
+  `;
   return (
-    <WrapperPages titlePage="Detail Note">
+    <WrapperPages
+      titlePage={currentLanguage === "en" ? "Detail Notes" : "Detail Catatan"}
+    >
       <section className="flex flex-col mt-5 p-5 pb-20 border border-gray-500">
         <div className="flex flex-row justify-between items-center">
           <Button type="button" text="back" title="back" isTransparant>
             <IoChevronBack />
-            <p>Back</p>
+            <p>{buttonLang.back[currentLanguage]}</p>
           </Button>
           <MoreOptions />
         </div>

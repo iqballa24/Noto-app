@@ -4,9 +4,9 @@ import Layout from "./components/Layout";
 import "./styles/App.css";
 
 const ActiveNotes = React.lazy(() => import("./pages/ActiveNotes"));
-const ArchiveNotes = React.lazy(() => import("./pages/ArchiveNotes"));
-const DetailNote = React.lazy(() => import("./pages/DetailNote"));
-const AddNote = React.lazy(() => import("./pages/AddNote"));
+const ArchivedNotes = React.lazy(() => import("./pages/ArchivedNotes"));
+const DetailNotes = React.lazy(() => import("./pages/DetailNotes"));
+const AddNotes = React.lazy(() => import("./pages/AddNotes"));
 
 function App() {
   return (
@@ -20,9 +20,9 @@ function App() {
       >
         <Routes>
           <Route path="/active-notes" index element={<ActiveNotes />} exact />
-          <Route path="/archive-notes" element={<ArchiveNotes />} exact />
-          <Route path="/detail-note/*" element={<DetailNote />} exact />
-          <Route path="/add-note" element={<AddNote />} exact />
+          <Route path="/archived-notes" element={<ArchivedNotes />} exact />
+          <Route path="/detail-notes/*" element={<DetailNotes />} exact />
+          <Route path="/add-notes" element={<AddNotes />} exact />
           <Route path="*" element={<p>Halaman kosong</p>} />
         </Routes>
       </Suspense>

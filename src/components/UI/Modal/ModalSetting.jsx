@@ -40,7 +40,10 @@ const ModalSetting = ({ onClose }) => {
 
   return (
     <React.Fragment>
-      {ReactDOM.createPortal(<ModalBackdrop onClose={onClose}/>, portalElement)}
+      {ReactDOM.createPortal(
+        <ModalBackdrop onClose={onClose} />,
+        portalElement
+      )}
       {ReactDOM.createPortal(
         <motion.div
           initial={{ scale: 0 }}
@@ -48,10 +51,12 @@ const ModalSetting = ({ onClose }) => {
           className="fixed min-w-fit md:min-w-[280px] flex flex-col top-[40%] left-[25%] sm:left-[40%] pt-5 pb-8 px-8 rounded-lg  shadow-lg z-20 text-dark bg-white dark:text-white dark:bg-dark-secondary bg-opacity-80"
         >
           <h1 className="text-base md:text-lg font-bold mb-4 text-center">
-            Setting
+            {themeCtx.changeLanguage === "en" ? "Settings" : "Pengaturan"}
           </h1>
           <div className="flex flex-row items-center space-x-5 mb-4">
-            <h2 className="flex-1 text-base md:text-lg">Theme :</h2>
+            <h2 className="flex-1 text-base md:text-lg">
+              {themeCtx.currentLanguage === "en" ? "Theme" : "Tema"} :
+            </h2>
             <ButtonSwitch
               isChecked={themeIsChecked.current}
               onChange={switchThemeHandler}
@@ -62,7 +67,9 @@ const ModalSetting = ({ onClose }) => {
             />
           </div>
           <div className="flex flex-row items-center space-x-5">
-            <h2 className="flex-1 text-base md:text-lg">Language :</h2>
+            <h2 className="flex-1 text-base md:text-lg">
+              {themeCtx.currentLanguage === "en" ? "Language" : "Bahasa"} :
+            </h2>
             <ButtonSwitch
               isChecked={languageIsChecked.current}
               onChange={switchLanguageHandler}
