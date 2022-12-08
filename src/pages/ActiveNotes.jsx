@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import { SearchBar } from "../components/UI";
 import NotesList from "../components/NotesList";
 import WrapperPages from "../components/WrapperPages";
-import { data } from "../constant";
 import ThemeContext from "../store/theme-context";
+import useFetch from "../hooks/useFetch";
 
 const ActiveNotes = () => {
+  const { getNotes } = useFetch();
+  const { data } = getNotes("/notes");
   const { currentLanguage } = useContext(ThemeContext);
 
   const searchHandler = (e) => {
@@ -13,10 +15,12 @@ const ActiveNotes = () => {
   };
 
   return (
-    <WrapperPages titlePage={currentLanguage === 'en' ? 'Active Notes' : 'Catatan Aktif'}>
+    <WrapperPages
+      titlePage={currentLanguage === "en" ? "Active Notes" : "Catatan Aktif"}
+    >
       <section className="flex flex-col py-5">
         <SearchBar onSearchHandler={searchHandler} />
-        <NotesList data={data} />
+        <NotesList data={data?.data ?? []} />
       </section>
     </WrapperPages>
   );

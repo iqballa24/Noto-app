@@ -1,43 +1,66 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { IoChevronBack, IoSave } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { Button, ModalConfirm } from "../components/UI";
+import { toast } from "react-toastify";
+import { motion } from "framer-motion";
+
+import { Button } from "../components/UI";
 import WrapperPages from "../components/WrapperPages";
 import ThemeContext from "../store/theme-context";
+import { pageMotion } from "../constant/animate";
 import { buttonLang } from "../constant";
+import useFetch from "../hooks/useFetch";
 
 const AddNote = () => {
+  const { addNotes } = useFetch();
   const navigate = useNavigate();
   const { currentLanguage } = useContext(ThemeContext);
-  const [titleValue, setTitleValue] = useState("");
-  const [bodyValue, setBodyValue] = useState("");
-  const [showModalConfirm, setModalConfirm] = useState(false);
+  const titleRef = useRef("");
+  const bodyRef = useRef("");
 
-  const changeHandlerValueTitle = (val) => {
-    setTitleValue(val);
+  const changeHandlerValueTitle = (e) => {
+    titleRef.current.value = e.target.value;
   };
 
   const inputHandlerBody = (e) => {
-    console.log(e.target.innerHTML);
-    setBodyValue(e.target.innerHTML);
+    bodyRef.current = e.target.innerHTML;
   };
 
-  const toggleModalConfirm = () => {
-    setModalConfirm((prev) => !prev);
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    const title = titleRef.current.value;
+    const body = bodyRef.current;
+
+    if (title === "" || body === "") {
+      return toast.error("please fill out all the blank fields");
+    }
+
+    const { data, error } = await addNotes({ title, body });
+
+    if (!error) {
+      navigate("/active-notes");
+    }
   };
 
   return (
     <WrapperPages
       titlePage={currentLanguage === "en" ? "Add Notes" : "Tambahkan Catatan"}
     >
-      <section className="flex flex-col py-10 space-y-8">
+      <motion.section
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageMotion}
+        className="flex flex-col py-10 space-y-8"
+      >
         <input
+          ref={titleRef}
           type="text"
           className="w-full bg-transparent border-0 text-2xl md:text-3xl focus:outline-none text-center"
           placeholder={
             currentLanguage === "en" ? "Secret Notes" : "Catatan Rahasia"
           }
-          value={titleValue}
           onChange={changeHandlerValueTitle}
         />
         <div
@@ -59,14 +82,13 @@ const AddNote = () => {
             type="button"
             title={buttonLang.save[currentLanguage]}
             isPrimary
-            onClick={toggleModalConfirm}
+            onClick={submitHandler}
           >
             {buttonLang.save[currentLanguage]}
             <IoSave />
           </Button>
         </div>
-        {showModalConfirm && <ModalConfirm onClose={toggleModalConfirm} />}
-      </section>
+      </motion.section>
     </WrapperPages>
   );
 };

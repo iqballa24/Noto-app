@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import useInput from "../hooks/useInput";
 import { Button, Input, InvalidText } from "../components/UI";
 
-import { login } from "../service/API";
+import useFetch from "../hooks/useFetch";
 import AuthContext from "../store/auth-context";
 
 const emailValidity = (value) => value.includes("@");
@@ -13,6 +13,7 @@ const passwordValidity = (value) =>
   /^(?=.*[A-Z])(?=.*\d)[\w@$!%*?&]{1,}$/g.test(value);
 
 const SignIn = () => {
+  const { login } = useFetch();
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
 
@@ -22,7 +23,6 @@ const SignIn = () => {
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
-    reset: resetEmail,
   } = useInput(emailValidity);
 
   const {
@@ -31,7 +31,6 @@ const SignIn = () => {
     hasError: passwordHasError,
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
-    reset: resetPassword,
   } = useInput(passwordValidity);
 
   const formIsValid = emailIsValid && passwordIsValid;
@@ -45,7 +44,7 @@ const SignIn = () => {
       );
     }
 
-    const { error, data } = await login({
+    const { data, error } = await login({
       email: emailValue,
       password: passwordValue,
     });

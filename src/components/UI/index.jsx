@@ -7,7 +7,7 @@ import ModalSetting from "./Modal/ModalSetting";
 import ModalConfirm from "./Modal/ModalConfirm";
 import ButtonSwitch from "./Button/ButtonSwitch";
 import InvalidText from "./InvalidText";
-import "react-toastify/dist/ReactToastify.css";
+import Spinner from "./Spinner";
 
 export {
   Input,
@@ -19,4 +19,5 @@ export {
   ModalConfirm,
   ButtonSwitch,
   InvalidText,
+  Spinner,
 };

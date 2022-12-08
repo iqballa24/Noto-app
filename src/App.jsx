@@ -1,7 +1,8 @@
-import React, { Suspense, useState, useContext } from "react";
+import React, { Suspense, useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthContext from "./store/auth-context";
 import Layout from "./components/Layout";
+import { Spinner } from "./components/UI";
 import "./styles/App.css";
 
 const ActiveNotes = React.lazy(() => import("./pages/ActiveNotes"));
@@ -17,13 +18,7 @@ function App() {
   if (authCtx.isLoggedIn) {
     return (
       <Layout>
-        <Suspense
-          fallback={
-            <div className="centered">
-              <p>Loading</p>
-            </div>
-          }
-        >
+        <Suspense fallback={<Spinner />}>
           <Routes>
             <Route path="/active-notes" index element={<ActiveNotes />} exact />
             <Route path="/archived-notes" element={<ArchivedNotes />} exact />
@@ -37,13 +32,7 @@ function App() {
   }
 
   return (
-    <Suspense
-      fallback={
-        <div className="centered">
-          <p>Loading</p>
-        </div>
-      }
-    >
+    <Suspense fallback={<Spinner />}>
       <Routes>
         <Route path="/signin" index element={<SignIn />} exact />
         <Route path="/signup" index element={<SignUp />} exact />

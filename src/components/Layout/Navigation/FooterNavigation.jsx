@@ -37,7 +37,7 @@ const FooterNavigation = ({ currentLanguage }) => {
           <div className="w-9/12 flex flex-col space-y-1">
             <p className="text-xs font-bold">{userLoggedIn?.data?.name}</p>
             <p className="text-xs text-light-gray">
-              {userLoggedIn?.data.email}
+              {userLoggedIn?.data?.email}
             </p>
           </div>
         </li>

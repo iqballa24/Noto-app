@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
 import { Button, Input, InvalidText } from "../components/UI";
-import { register } from "../service/API";
+import useFetch from "../hooks/useFetch";
 
 const isNotEmpty = (value) => value.trim() !== "";
 const emailValidity = (value) => value.includes("@");
@@ -12,6 +12,7 @@ const passwordValidity = (value) =>
   /^(?=.*[A-Z])(?=.*\d)[\w@$!%*?&]{1,}$/g.test(value);
 
 const SignIn = () => {
+  const { register } = useFetch();
   const navigate = useNavigate();
 
   const {
@@ -20,7 +21,6 @@ const SignIn = () => {
     hasError: nameHasError,
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
-    reset: resetName,
   } = useInput(isNotEmpty);
 
   const {
@@ -29,7 +29,6 @@ const SignIn = () => {
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
-    reset: resetEmail,
   } = useInput(emailValidity);
 
   const {
@@ -38,7 +37,6 @@ const SignIn = () => {
     hasError: passwordHasError,
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
-    reset: resetPassword,
   } = useInput(passwordValidity);
 
   const confirmPassword = (value) => value === passwordValue;
@@ -49,7 +47,6 @@ const SignIn = () => {
     hasError: passwordConfirmHasError,
     valueChangeHandler: passwordConfirmChangeHandler,
     inputBlurHandler: passwordConfirmBlurHandler,
-    reset: resetPasswordConfirm,
   } = useInput(confirmPassword);
 
   const formIsValid =
@@ -69,8 +66,8 @@ const SignIn = () => {
       password: passwordValue,
     };
 
-    const { error } = register({ ...data });
-
+    const { error } = await register({ ...data });
+    
     if (!error) {
       setTimeout(() => {
         return navigate("/signin");
