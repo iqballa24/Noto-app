@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { IoChevronBack, IoSave } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { Button, Input, ModalConfirm } from "../components/UI";
+import { Button, ModalConfirm } from "../components/UI";
 import WrapperPages from "../components/WrapperPages";
 import ThemeContext from "../store/theme-context";
 import { buttonLang } from "../constant";
@@ -31,7 +31,8 @@ const AddNote = () => {
       titlePage={currentLanguage === "en" ? "Add Notes" : "Tambahkan Catatan"}
     >
       <section className="flex flex-col py-10 space-y-8">
-        <Input
+        <input
+          type="text"
           className="w-full bg-transparent border-0 text-2xl md:text-3xl focus:outline-none text-center"
           placeholder={
             currentLanguage === "en" ? "Secret Notes" : "Catatan Rahasia"

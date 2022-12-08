@@ -4,11 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { HiLogout } from "react-icons/hi";
 import { Button } from "../UI";
 import { buttonLang } from "../../constant";
+import { toast } from "react-toastify";
+import AuthContext from "../../store/auth-context";
 import ThemeContext from "../../store/theme-context";
 
 const WrapperPages = ({ children, titlePage }) => {
   const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
   const { currentLanguage } = useContext(ThemeContext);
+
+  const onlogoutHandler = () => {
+    logout();
+    toast.success("User log out successfully");
+    navigate("/signin");
+  };
 
   return (
     <div className="flex flex-col w-full">
@@ -20,7 +29,7 @@ const WrapperPages = ({ children, titlePage }) => {
           type="button"
           title="Log out"
           isTransparant
-          onClick={() => navigate("/login")}
+          onClick={onlogoutHandler}
         >
           <p>{buttonLang.logout[currentLanguage]}</p>
           <HiLogout />

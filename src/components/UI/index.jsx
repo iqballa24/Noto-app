@@ -6,6 +6,8 @@ import MoreOptions from "./MoreOption";
 import ModalSetting from "./Modal/ModalSetting";
 import ModalConfirm from "./Modal/ModalConfirm";
 import ButtonSwitch from "./Button/ButtonSwitch";
+import InvalidText from "./InvalidText";
+import "react-toastify/dist/ReactToastify.css";
 
 export {
   Input,
@@ -16,4 +18,5 @@ export {
   ModalSetting,
   ModalConfirm,
   ButtonSwitch,
+  InvalidText,
 };

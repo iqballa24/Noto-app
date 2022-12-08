@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { ModalSetting } from "../../UI";
 import PropTypes from "prop-types";
+import AuthContext from "../../../store/auth-context";
 
 const FooterNavigation = ({ currentLanguage }) => {
+  const { userLoggedIn } = useContext(AuthContext);
   const [showModalSettting, setShowModalSetting] = useState(false);
 
   const toggleModalSetting = () => {
@@ -26,15 +28,17 @@ const FooterNavigation = ({ currentLanguage }) => {
         <li className="flex flex-row items-center px-2 py-7">
           <div className="w-3/12">
             <img
-              src="https://ui-avatars.com/api/?name=iqbal&amp;background=random"
+              src={`https://ui-avatars.com/api/?name=${userLoggedIn?.data?.name}&amp;background=random`}
               alt="avatar"
               width="100%"
               className="rounded-full w-[44px]"
             />
           </div>
           <div className="w-9/12 flex flex-col space-y-1">
-            <p className="text-xs font-bold">Tengku Iqbal Nugraha</p>
-            <p className="text-xs text-light-gray">iqbalnugraha347@gmail.com</p>
+            <p className="text-xs font-bold">{userLoggedIn?.data?.name}</p>
+            <p className="text-xs text-light-gray">
+              {userLoggedIn?.data.email}
+            </p>
           </div>
         </li>
       </ul>
