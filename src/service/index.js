@@ -5,9 +5,13 @@ const fetcher = async (url, token) => {
     const res = await API.get(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return { data: res.data.data, status: status };
+    return { data: res.data };
   } catch (err) {
-    throw { message: err.message, request: err.request };
+    throw {
+      message: err.message,
+      request: err.request,
+      response: err.response,
+    };
   }
 };
 

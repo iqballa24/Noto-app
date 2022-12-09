@@ -7,17 +7,30 @@ import AuthContext from "../store/auth-context";
 export default function useFetch() {
   const authCtx = useContext(AuthContext);
 
+  async function getUserLogged(token) {
+    const res = await service.fetcher("/users/me", token);
+    const data = await res.data;
+    return { data };
+  }
+
   const getNotes = (url) => {
-    const { data, error, mutate } = useSWR([url, authCtx.token], service.fetcher);
+    const { data, error, mutate } = useSWR(
+      [url, authCtx.token],
+      service.fetcher
+    );
     const hasError = useMemo(() => error?.message);
 
     useEffect(() => {
       if (hasError) {
-        toast.error(error.message);
+        toast.error(hasError);
+      }
+
+      if (error?.response?.status === 401) { 
+        authCtx.logout();
       }
     }, [hasError]);
 
-    return { data, mutate };
+    return { data: data?.data, mutate };
   };
 
   async function addNotes({ title, body }) {
@@ -31,6 +44,40 @@ export default function useFetch() {
     if (data.status !== "success") {
       toast.error(data.message);
       return { error: true, data: null };
+    }
+
+    toast.success(data.message);
+    return { error: false, data: data.data };
+  }
+
+  async function archiveNote(id) {
+    const res = await service.postData(
+      `/notes/${id}/archive`,
+      JSON.stringify(id),
+      authCtx.token
+    );
+    const data = await res.data;
+
+    if (data.status !== "success") {
+      toast.error(data.message);
+      return { error: false, data: data.data };
+    }
+
+    toast.success(data.message);
+    return { error: false, data: data.data };
+  }
+
+  async function unarchiveNote(id) {
+    const res = await service.postData(
+      `/notes/${id}/unarchive`,
+      JSON.stringify(id),
+      authCtx.token
+    );
+    const data = await res.data;
+
+    if (data.status !== "success") {
+      toast.error(data.message);
+      return { error: false, data: data.data };
     }
 
     toast.success(data.message);
@@ -81,5 +128,14 @@ export default function useFetch() {
     return { error: false, data: data.data };
   }
 
-  return { getNotes, login, register, addNotes, deleteNote };
+  return {
+    getUserLogged,
+    getNotes,
+    login,
+    register,
+    addNotes,
+    deleteNote,
+    archiveNote,
+    unarchiveNote,
+  };
 }

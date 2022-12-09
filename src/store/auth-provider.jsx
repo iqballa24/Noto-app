@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { getUserLogged } from "../service/API";
+import useFetch from "../hooks/useFetch";
 import AuthContext from "./auth-context";
 import PropTypes from "prop-types";
 
 const AuthContextProvider = ({ children }) => {
+  const { getUserLogged } = useFetch();
   const [userLoggedIn, setUserLoggedIn] = useState(null);
   const [token, setToken] = useLocalStorage("token", null);
   const userIsLoggedIn = token === null ? false : true;
@@ -21,12 +23,17 @@ const AuthContextProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    async function getUserDataLoggedIn() {
-      const data = await getUserLogged();
-      setUserLoggedIn(data);
+    async function getUserDataLoggedIn(token) {
+      try {
+        const { data } = await getUserLogged(token);
+        setUserLoggedIn(data);
+      } catch (err) {
+        toast.error(err.message);
+        logoutHandler();
+      }
     }
     if (token) {
-      getUserDataLoggedIn();
+      getUserDataLoggedIn(token);
     }
   }, [token]);
 

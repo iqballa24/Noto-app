@@ -11,7 +11,7 @@ import ThemeContext from "../../../store/theme-context";
 
 const portalElement = document.getElementById("overlays");
 
-const ModalConfirm = ({ onClose }) => {
+const ModalConfirm = ({ onClose, onConfirm }) => {
   const { currentLanguage: lang } = useContext(ThemeContext);
   return (
     <React.Fragment>
@@ -40,7 +40,7 @@ const ModalConfirm = ({ onClose }) => {
               type="button"
               title="yup"
               isPrimary
-              onClick={() => console.log("hola!")}
+              onClick={onConfirm}
             >
               <p>{modalLang.modalConfirm.button.yes[lang]}</p>
             </Button>
@@ -57,6 +57,7 @@ const ModalConfirm = ({ onClose }) => {
 
 ModalConfirm.propTypes = {
   onClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
 };
 
 export default ModalConfirm;
