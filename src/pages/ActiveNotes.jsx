@@ -6,13 +6,19 @@ import ThemeContext from "../store/theme-context";
 import useFetch from "../hooks/useFetch";
 
 const ActiveNotes = () => {
-  const { getNotes } = useFetch();
-  const { data } = getNotes("/notes");
+  const { getNotes, deleteNote } = useFetch();
+  const { data, mutate } = getNotes("/notes");
   const { currentLanguage } = useContext(ThemeContext);
 
   const searchHandler = (e) => {
     console.log(e.target.value);
   };
+
+  async function deleteHandler(id) {
+    const { data, error } = await deleteNote(id);
+    mutate();
+    return data;
+  }
 
   return (
     <WrapperPages
@@ -20,7 +26,7 @@ const ActiveNotes = () => {
     >
       <section className="flex flex-col py-5">
         <SearchBar onSearchHandler={searchHandler} />
-        <NotesList data={data?.data ?? []} />
+        <NotesList data={data?.data ?? []} onDelete={deleteHandler} />
       </section>
     </WrapperPages>
   );

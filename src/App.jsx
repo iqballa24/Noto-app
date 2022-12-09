@@ -22,7 +22,7 @@ function App() {
           <Routes>
             <Route path="/active-notes" index element={<ActiveNotes />} exact />
             <Route path="/archived-notes" element={<ArchivedNotes />} exact />
-            <Route path="/detail-notes/*" element={<DetailNotes />} exact />
+            <Route path="/detail-notes/:notesId" element={<DetailNotes />} exact />
             <Route path="/add-notes" element={<AddNotes />} exact />
             <Route path="*" element={<p>Halaman kosong</p>} />
           </Routes>

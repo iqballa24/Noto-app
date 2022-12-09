@@ -5,7 +5,7 @@ import { MoreOptions } from "../UI";
 import formatDate from "../../utils/formatDate";
 import truncateText from "../../utils/truncateText";
 
-const NoteItem = ({ id, title, body, createdAt }) => {
+const NoteItem = ({ id, title, body, createdAt, onDelete }) => {
   const createdDate = formatDate(createdAt);
   const bodyTruncate = truncateText(body, 150);
 
@@ -18,12 +18,14 @@ const NoteItem = ({ id, title, body, createdAt }) => {
         >
           {title}
         </Link>
-        <MoreOptions />
+        <MoreOptions onDelete={() => onDelete(id)} />
       </div>
       <p className="text-sm md:text-base text-light-gray mb-8 max-h-28 overflow-hidden">
         {bodyTruncate}
       </p>
-      <p className="text-xs md:text-sm flex flex-auto justify-end items-end">{createdDate}</p>
+      <p className="text-xs md:text-sm flex flex-auto justify-end items-end">
+        {createdDate}
+      </p>
     </div>
   );
 };
@@ -33,6 +35,7 @@ NoteItem.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default NoteItem;
