@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ReactHtmlParser from 'react-html-parser';
 import { MoreOptions } from "../UI";
 import formatDate from "../../utils/formatDate";
 import truncateText from "../../utils/truncateText";
@@ -25,7 +24,7 @@ const NoteItem = ({ id, title, body, createdAt, onDelete, onArchive }) => {
         />
       </div>
       <p className="text-sm md:text-base text-light-gray mb-8 max-h-28 overflow-hidden">
-        {ReactHtmlParser(bodyTruncate)}
+        {bodyTruncate}
       </p>
       <p className="text-xs md:text-sm flex flex-auto justify-end items-end">
         {createdDate}

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
-import ReactHtmlParser from "react-html-parser";
 import { Button, MoreOptions, Spinner } from "../components/UI";
 import WrapperPages from "../components/WrapperPages";
 import ThemeContext from "../store/theme-context";
@@ -80,7 +79,7 @@ const DetailNote = () => {
           {data && formatDate(data?.data?.createdAt)}
         </p>
         <p className="text-sm md:text-base pt-7  leading-7">
-          {ReactHtmlParser(data?.data?.body)}
+          {data?.data?.body}
         </p>
         {loadingNotes && <Spinner />}
         {isLoading && <Spinner />}
