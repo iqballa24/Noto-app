@@ -6,10 +6,10 @@ import WrapperPages from "../components/WrapperPages";
 import ThemeContext from "../store/theme-context";
 import useFetch from "../hooks/useFetch";
 
-const ActiveNotes = () => {
+const ArchiveNotes = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { getNotes, deleteNote, archiveNote } = useFetch();
-  const { data, mutate, loading: loadingNotes } = getNotes("/notes");
+  const { getNotes, deleteNote, unarchiveNote } = useFetch();
+  const { data, mutate, loading: loadingNotes } = getNotes("/notes/archived");
   const { currentLanguage } = useContext(ThemeContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -54,10 +54,10 @@ const ActiveNotes = () => {
     }
   }
 
-  async function archiveNoteHandler(id) {
+  async function unArchiveNoteHandler(id) {
     setIsLoading(true);
     try {
-      const { data, error } = await archiveNote(id);
+      const { data, error } = await unarchiveNote(id);
 
       if (error) {
         throw Error(data);
@@ -66,20 +66,21 @@ const ActiveNotes = () => {
     } catch (err) {
       console.log(err);
     } finally {
+      console.log("tester");
       setIsLoading(false);
     }
   }
 
   return (
     <WrapperPages
-      titlePage={currentLanguage === "en" ? "Active Notes" : "Catatan Aktif"}
+      titlePage={currentLanguage === "en" ? "Archived Notes" : "Catatan Arsip"}
     >
       <section className="flex flex-col py-5">
         <SearchBar onSearchHandler={searchHandler} value={keyword} />
         <NotesList
-          data={filteredNotes}
+          data={filteredNotes ?? []}
           onDelete={deleteHandler}
-          onArchive={archiveNoteHandler}
+          onArchive={unArchiveNoteHandler}
         />
         {filteredNotes.length === 0 && data?.data.length > 0 && searchNotFound}
         {data?.data.length === 0 && <EmptyState />}
@@ -90,4 +91,4 @@ const ActiveNotes = () => {
   );
 };
 
-export default ActiveNotes;
+export default ArchiveNotes;

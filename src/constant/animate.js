@@ -27,4 +27,10 @@ const pageMotion = {
   },
 };
 
-export { pageMotion, cardVariants };
+const spring = {
+  type: "spring",
+  stiffness: 700,
+  damping: 30,
+};
+
+export { pageMotion, cardVariants, spring };

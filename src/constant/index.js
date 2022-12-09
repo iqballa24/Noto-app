@@ -3,26 +3,46 @@ import { HiHome, HiArchive, HiPlusCircle } from "react-icons/hi";
 const menus = [
   {
     id: 1,
-    name: "Active Notes",
+    name: { en: "Active Notes", id: "Catatan Aktif" },
     icon: HiHome,
     path: "/active-notes",
     active: true,
   },
   {
     id: 2,
-    name: "Archive Notes",
+    name: { en: "Archived Notes", id: "Catatan Arsip" },
     icon: HiArchive,
-    path: "/archive-notes",
+    path: "/archived-notes",
     active: false,
   },
   {
     id: 3,
-    name: "Add Notes",
+    name: { en: "Add Notes", id: "Tambahkan Catatan" },
     icon: HiPlusCircle,
-    path: "/add-note",
+    path: "/add-notes",
     active: false,
   },
 ];
+
+const buttonLang = {
+  back: { en: "Back", id: "Kembali" },
+  logout: { en: "Log out", id: "Keluar" },
+  save: { en: "Save", id: "Simpan" },
+};
+
+const modalLang = {
+  modalConfirm: {
+    title: { en: "Are you sure?", id: "Apakah kamu yakin?" },
+    text: {
+      en: "You won't be able to revert this!",
+      id: "Kamu tidak akan dapat mengembalikannya nanti!",
+    },
+    button: {
+      yes: { en: "Yup, absolutely", id: "Iyalah yakin" },
+      no: { en: "Nope!", id: "Masih Ragu sih" },
+    },
+  },
+};
 
 const data = [
   {
@@ -83,4 +103,4 @@ const data = [
   },
 ];
 
-export { menus, data };
+export { menus, data, buttonLang, modalLang };
