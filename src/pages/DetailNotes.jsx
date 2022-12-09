@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
 import ReactHtmlParser from "react-html-parser";
-import { Button, MoreOptions } from "../components/UI";
+import { Button, MoreOptions, Spinner } from "../components/UI";
 import WrapperPages from "../components/WrapperPages";
 import ThemeContext from "../store/theme-context";
 import { buttonLang } from "../constant";
@@ -12,24 +12,44 @@ import formatDate from "../utils/formatDate";
 const DetailNote = () => {
   const navigate = useNavigate();
   const { notesId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
   const { getNotes, deleteNote, archiveNote, unarchiveNote } = useFetch();
-  const { data, mutate } = getNotes(`/notes/${notesId}`);
+  const { data, mutate, loading: loadingNotes } = getNotes(`/notes/${notesId}`);
   const { currentLanguage } = useContext(ThemeContext);
 
   async function deleteHandler() {
-    const { error } = await deleteNote(notesId);
+    setIsLoading(true);
+    try {
+      const { data, error } = await deleteNote(notesId);
 
-    !error && navigate("/active-notes");
+      if (error) {
+        throw Error(data);
+      }
+      navigate("/active-notes");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const archiveStatus = data?.data?.archived;
 
   async function toggleArchiveHandler() {
-    const { error } = archiveStatus
-      ? await unarchiveNote(notesId)
-      : await archiveNote(notesId);
-
-    return !error && mutate();
+    setIsLoading(true);
+    try {
+      const { error } = archiveStatus
+        ? await unarchiveNote(notesId)
+        : await archiveNote(notesId);
+      if (error) {
+        throw Error(data);
+      }
+      mutate();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -62,6 +82,8 @@ const DetailNote = () => {
         <p className="text-sm md:text-base pt-7  leading-7">
           {ReactHtmlParser(data?.data?.body)}
         </p>
+        {loadingNotes && <Spinner />}
+        {isLoading && <Spinner />}
       </section>
     </WrapperPages>
   );

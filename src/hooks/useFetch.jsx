@@ -25,12 +25,12 @@ export default function useFetch() {
         toast.error(hasError);
       }
 
-      if (error?.response?.status === 401) { 
+      if (error?.response?.status === 401) {
         authCtx.logout();
       }
     }, [hasError]);
 
-    return { data: data?.data, mutate };
+    return { data: data?.data, mutate, loading: !data && !error };
   };
 
   async function addNotes({ title, body }) {
@@ -43,7 +43,7 @@ export default function useFetch() {
 
     if (data.status !== "success") {
       toast.error(data.message);
-      return { error: true, data: null };
+      return { error: true, data: data.message };
     }
 
     toast.success(data.message);
@@ -60,7 +60,7 @@ export default function useFetch() {
 
     if (data.status !== "success") {
       toast.error(data.message);
-      return { error: false, data: data.data };
+      return { error: true, data: data.data };
     }
 
     toast.success(data.message);
@@ -77,7 +77,7 @@ export default function useFetch() {
 
     if (data.status !== "success") {
       toast.error(data.message);
-      return { error: false, data: data.data };
+      return { error: true, data: data.data };
     }
 
     toast.success(data.message);
@@ -90,7 +90,7 @@ export default function useFetch() {
 
     if (data.status !== "success") {
       toast.error(data.message);
-      return { error: false, data: data.data };
+      return { error: true, data: data.message };
     }
 
     toast.success(data.message);

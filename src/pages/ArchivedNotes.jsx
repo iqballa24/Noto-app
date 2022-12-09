@@ -1,14 +1,15 @@
 import React, { useContext, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { SearchBar, EmptyState } from "../components/UI";
+import { SearchBar, EmptyState, Spinner } from "../components/UI";
 import NotesList from "../components/NotesList";
 import WrapperPages from "../components/WrapperPages";
 import ThemeContext from "../store/theme-context";
 import useFetch from "../hooks/useFetch";
 
 const ArchiveNotes = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { getNotes, deleteNote, unarchiveNote } = useFetch();
-  const { data, mutate } = getNotes("/notes/archived");
+  const { data, mutate, loading: loadingNotes } = getNotes("/notes/archived");
   const { currentLanguage } = useContext(ThemeContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,15 +39,36 @@ const ArchiveNotes = () => {
     );
 
   async function deleteHandler(id) {
-    const { data, error } = await deleteNote(id);
-    mutate();
-    return data;
+    setIsLoading(true);
+    try {
+      const { data, error } = await deleteNote(id);
+
+      if (error) {
+        throw Error(data);
+      }
+      mutate();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function unArchiveNoteHandler(id) {
-    const { data, error } = await unarchiveNote(id);
-    mutate();
-    return { data, error };
+    setIsLoading(true);
+    try {
+      const { data, error } = await unarchiveNote(id);
+
+      if (error) {
+        throw Error(data);
+      }
+      mutate();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log("tester");
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -62,6 +84,8 @@ const ArchiveNotes = () => {
         />
         {filteredNotes.length === 0 && data?.data.length > 0 && searchNotFound}
         {data?.data.length === 0 && <EmptyState />}
+        {loadingNotes && <Spinner />}
+        {isLoading && <Spinner />}
       </section>
     </WrapperPages>
   );

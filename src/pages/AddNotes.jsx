@@ -1,10 +1,10 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { IoChevronBack, IoSave } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 
-import { Button } from "../components/UI";
+import { Button, Spinner } from "../components/UI";
 import WrapperPages from "../components/WrapperPages";
 import ThemeContext from "../store/theme-context";
 import { pageMotion } from "../constant/animate";
@@ -12,6 +12,7 @@ import { buttonLang } from "../constant";
 import useFetch from "../hooks/useFetch";
 
 const AddNote = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { addNotes } = useFetch();
   const navigate = useNavigate();
   const { currentLanguage } = useContext(ThemeContext);
@@ -27,6 +28,7 @@ const AddNote = () => {
   };
 
   const submitHandler = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     const title = titleRef.current.value;
@@ -36,10 +38,16 @@ const AddNote = () => {
       return toast.error("please fill out all the blank fields");
     }
 
-    const { data, error } = await addNotes({ title, body });
-
-    if (!error) {
+    try {
+      const { data, error } = await addNotes({ title, body });
+      if (error) {
+        throw Error(data);
+      }
       navigate("/active-notes");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -88,6 +96,7 @@ const AddNote = () => {
             <IoSave />
           </Button>
         </div>
+        {isLoading && <Spinner />}
       </motion.section>
     </WrapperPages>
   );

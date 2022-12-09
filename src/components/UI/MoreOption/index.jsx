@@ -11,6 +11,7 @@ const MoreOptions = ({ onDelete, onArchive }) => {
   };
 
   const onConfirmHandler = () => {
+    setShowModalConfirm(false);
     onDelete();
   };
 
