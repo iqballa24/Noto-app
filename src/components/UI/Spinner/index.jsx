@@ -12,16 +12,16 @@ const Spinner = () => {
         <div className="fixed top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 z-20">
           <div className={classes.waterfall}>
             <div>
-              <BsSquareFill />
+              <BsSquareFill className="text-cyan" />
             </div>
             <div>
-              <BsSquareFill />
+              <BsSquareFill className="text-cyan" />
             </div>
             <div>
-              <BsSquareFill />
+              <BsSquareFill className="text-cyan" />
             </div>
             <div>
-              <BsSquareFill />
+              <BsSquareFill className="text-cyan" />
             </div>
           </div>
         </div>,

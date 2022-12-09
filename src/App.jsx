@@ -24,7 +24,7 @@ function App() {
             <Route path="/archived-notes" element={<ArchivedNotes />} exact />
             <Route path="/detail-notes/:notesId" element={<DetailNotes />} exact />
             <Route path="/add-notes" element={<AddNotes />} exact />
-            <Route path="*" element={<p>Halaman kosong</p>} />
+            <Route path="*" element={<Navigate to="/active-notes" replace />} />
           </Routes>
         </Suspense>
       </Layout>
