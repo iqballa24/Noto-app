@@ -13,9 +13,12 @@ const AuthContextProvider = ({ children }) => {
     setToken(null);
   }, []);
 
-  const loginHandler = useCallback((token) => {
-    setToken(token);
-  }, []);
+  const loginHandler = useCallback(
+    (token) => {
+      setToken(token);
+    },
+    [token]
+  );
 
   useEffect(() => {
     async function getUserDataLoggedIn() {
@@ -24,8 +27,6 @@ const AuthContextProvider = ({ children }) => {
     }
     if (token) {
       getUserDataLoggedIn();
-    } else {
-      logoutHandler();
     }
   }, [token]);
 
