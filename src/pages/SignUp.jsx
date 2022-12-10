@@ -59,8 +59,8 @@ const SignIn = () => {
     e.preventDefault();
 
     if (!formIsValid)
-      return toast.warn(
-        "Please fill out the form and fill with the valid data"
+      return toast.error(
+        "Please fill out the form below and fill in with the valid data"
       );
 
     const signUpData = {
@@ -127,7 +127,7 @@ const SignIn = () => {
                 hasError={emailHasError}
               />
               {emailHasError && (
-                <InvalidText>Email format is incorrect.</InvalidText>
+                <InvalidText>Please enter a valid email address.</InvalidText>
               )}
               <Input
                 type="password"
@@ -154,7 +154,7 @@ const SignIn = () => {
               />
               {passwordConfirmHasError && (
                 <InvalidText>
-                  Your password and confirmation password must match.
+                  Your confirmation password must match with password.
                 </InvalidText>
               )}
               <div className="mt-8 space-y-3 w-full">

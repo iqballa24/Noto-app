@@ -96,7 +96,7 @@ const SignIn = () => {
                 hasError={emailHasError}
               />
               {emailHasError && (
-                <InvalidText>Email format is incorrect.</InvalidText>
+                <InvalidText>Please enter a valid email address.</InvalidText>
               )}
               <Input
                 type="password"
