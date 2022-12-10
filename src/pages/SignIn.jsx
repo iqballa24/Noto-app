@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import useInput from "../hooks/useInput";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button, Input, InvalidText, Spinner } from "../components/UI";
-
+import useInput from "../hooks/useInput";
 import useFetch from "../hooks/useFetch";
 import AuthContext from "../store/auth-context";
+import { pageMotion } from "../constant/animate";
 
 const emailValidity = (value) => value.includes("@");
 const passwordValidity = (value) =>
@@ -64,14 +65,22 @@ const SignIn = () => {
   };
 
   return (
-    <>
-      <div className="relative w-full h-[100vh] bg-light-secondary dark:bg-dark-secondary text-dark-gray dark:text-white">
+    <AnimatePresence>
+      <motion.div
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageMotion}
+        className="relative w-full h-[100vh] bg-light-secondary dark:bg-dark-secondary text-dark-gray dark:text-white"
+      >
         <div className="fixed top-[50%] left-[50%] -translate-x-2/4 -translate-y-2/4 w-full max-w-3xl">
           <div className="flex flex-col rounded-md p-5">
-            <h1 className="text-5xl text-cyan font-bold py-4">ノート Noto</h1>
-            <p className="text-2xl tracking-wide">
-              <strong className="text-3xl">Welcome back!</strong> let's sign in
-              to see your notes
+            <h1 className="text-3xl md:text-5xl text-cyan font-bold py-4">
+              ノート Noto
+            </h1>
+            <p className="text-lg md:text-2xl tracking-wide">
+              <strong className="text-xl md:text-3xl">Welcome back!</strong>{" "}
+              let's sign in to see your notes
             </p>
             <form
               className="flex flex-col w-full py-8"
@@ -111,9 +120,9 @@ const SignIn = () => {
                   isFull
                   onClick={submitHandler}
                 >
-                  <p className="text-lg text-white">Sign In</p>
+                  <p className="text-base md:text-lg text-white">Sign In</p>
                 </Button>
-                <p className="text-dark dark:text-light-secondary tracking-wide">
+                <p className="text-sm md:text-base text-dark dark:text-light-secondary tracking-wide">
                   Don't have an account?{" "}
                   <Link to="/signup" className="text-blue-400 hover:underline">
                     Sign Up
@@ -124,9 +133,9 @@ const SignIn = () => {
             </form>
           </div>
         </div>
-      </div>
+      </motion.div>
       {isLoading && <Spinner />}
-    </>
+    </AnimatePresence>
   );
 };
 

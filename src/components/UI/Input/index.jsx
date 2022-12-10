@@ -15,7 +15,7 @@ const Input = ({ type, placeholder, value, onChange, onBlur, hasError }) => {
     <div className="relative">
       <input
         type={type === "password" ? passwordType : type}
-        className={`w-full bg-transparent border border-dark-secondary dark:border-light-secondary p-4 text-lg md:text-xl rounded-md my-3 ${
+        className={`w-full bg-transparent border border-dark-secondary dark:border-light-secondary p-3 md:p-4 text-base md:text-xl rounded-md my-3 ${
           hasError && "!border-red focus:outline-red"
         }`}
         placeholder={placeholder}
@@ -25,7 +25,7 @@ const Input = ({ type, placeholder, value, onChange, onBlur, hasError }) => {
       />
       {type === "password" && (
         <div
-          className="absolute top-[50%] -translate-y-2/4 right-5 p-3 border rounded-md cursor-pointer hover:text-cyan "
+          className="absolute top-[50%] -translate-y-2/4 right-5 p-2 md:p-3 border rounded-md cursor-pointer hover:text-cyan "
           onClick={toggleShowPassword}
         >
           {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}

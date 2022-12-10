@@ -46,9 +46,9 @@ const ModalSetting = ({ onClose }) => {
       )}
       {ReactDOM.createPortal(
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="fixed min-w-fit md:min-w-[280px] flex flex-col top-[40%] left-[25%] sm:left-[40%] pt-5 pb-8 px-8 rounded-lg  shadow-lg z-20 text-dark bg-white dark:text-white dark:bg-dark-secondary bg-opacity-80"
+        initial={{ top: 0 }}
+        animate={{ top: "30%" }}
+          className="fixed w-full max-w-[280px] top-[35%] left-[50%] -translate-x-2/4 pt-5 pb-8 px-8 rounded-lg shadow-lg z-20 text-dark bg-white dark:text-white dark:bg-dark-secondary bg-opacity-80"
         >
           <h1 className="text-base md:text-lg font-bold mb-4 text-center">
             {themeCtx.changeLanguage === "en" ? "Settings" : "Pengaturan"}

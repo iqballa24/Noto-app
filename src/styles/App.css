@@ -28,6 +28,7 @@ body {
   font-family: "Nunito", sans-serif;
   background-color: var(--background-color);
   color: var(--font-color);
+  overflow: hidden;
 }
 
 #root {
