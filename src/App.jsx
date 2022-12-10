@@ -20,10 +20,11 @@ function App() {
       <Layout>
         <Suspense fallback={<Spinner />}>
           <Routes>
-            <Route path="/active-notes" index element={<ActiveNotes />} exact />
-            <Route path="/archived-notes" element={<ArchivedNotes />} exact />
-            <Route path="/detail-notes/:notesId" element={<DetailNotes />} exact />
-            <Route path="/add-notes" element={<AddNotes />} exact />
+            <Route index path="/" element={<Navigate replace to="/active-notes" />} />
+            <Route path="/active-notes" element={<ActiveNotes />} />
+            <Route path="/archived-notes" element={<ArchivedNotes />} />
+            <Route path="/detail-notes/:notesId" element={<DetailNotes />} />
+            <Route path="/add-notes" element={<AddNotes />} />
             <Route path="*" element={<Navigate to="/active-notes" replace />} />
           </Routes>
         </Suspense>
@@ -34,9 +35,10 @@ function App() {
   return (
     <Suspense fallback={<Spinner />}>
       <Routes>
-        <Route path="/signin" index element={<SignIn />} exact />
-        <Route path="/signup" index element={<SignUp />} exact />
-        <Route path="*" element={<Navigate to="/signin" replace />} />
+        <Route index path="/" element={<Navigate replace to="/signin" />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="*" element={<Navigate replace to="/signin" />} />
       </Routes>
     </Suspense>
   );

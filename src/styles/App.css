@@ -8,6 +8,11 @@
   --background-color: #34363f;
 }
 
+[data-theme="light"] {
+  --font-color: #5D5E67;
+  --background-color: #ECECEC;
+}
+
 * {
   margin: 0;
   padding: 0;

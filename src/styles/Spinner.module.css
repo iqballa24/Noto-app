@@ -38,7 +38,6 @@
 .waterfall div {
   -webkit-animation: waterfall 1.5s infinite;
   animation: waterfall 1.5s infinite;
-  background-color: var(--primary);
   height: 20px;
   left: 50%;
   margin-top: -10px;

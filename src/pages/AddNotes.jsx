@@ -28,7 +28,6 @@ const AddNote = () => {
   };
 
   const submitHandler = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
 
     const title = titleRef.current.value;
@@ -39,6 +38,7 @@ const AddNote = () => {
     }
 
     try {
+      setIsLoading(true);
       const { data, error } = await addNotes({ title, body });
       if (error) {
         throw Error(data);
