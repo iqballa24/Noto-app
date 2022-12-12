@@ -35,7 +35,7 @@ const modalLang = {
     title: { en: "Are you sure?", id: "Apakah kamu yakin?" },
     text: {
       en: "You won't be able to revert this!",
-      id: "Kamu tidak akan dapat mengembalikannya nanti!",
+      id: "Kamu tidak akan dapat mengembalikannya kembali!",
     },
     button: {
       yes: { en: "Yup, absolutely", id: "Iyalah yakin" },

@@ -41,8 +41,8 @@ const SignIn = () => {
     e.preventDefault();
 
     if (!formIsValid) {
-      return toast.warn(
-        "Please fill out the form and fill with the valid data"
+      return toast.error(
+        "Please fill out the form below and fill in with the valid data"
       );
     }
 

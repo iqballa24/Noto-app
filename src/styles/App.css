@@ -4,13 +4,13 @@
 @tailwind utilities;
 
 :root {
-  --font-color: #ffffff;
-  --background-color: #34363f;
+  --font-color: #5d5e67;
+  --background-color: #ececec;
 }
 
-[data-theme="light"] {
-  --font-color: #5D5E67;
-  --background-color: #ECECEC;
+.dark {
+  --font-color: #ffffff;
+  --background-color: #34363f;
 }
 
 * {
