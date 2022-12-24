@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const MainNavigation = ({ currentLanguage }) => {
   const classNavLink =
-    "grid grid-flow-col auto-cols-max gap-6 pl-5 py-3 mb-5 cursor-pointer hover:text-cyan";
+    "grid grid-flow-col auto-cols-max gap-6 pl-5 py-3 mb-5 cursor-pointer hover:text-cyan transition-all";
   const active =
     "text-cyan rounded-lg border-b border-cyan bg-cyan text-white dark:bg-gradient-to-r from-[#43444b] to-[#41444e] dark:text-cyan hover:text-white";
 

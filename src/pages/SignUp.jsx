@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button, Input, InvalidText, Spinner } from "../components/UI";
-import useInput from "../hooks/useInput";
-import useFetch from "../hooks/useFetch";
-import { pageMotion } from "../constant/animate";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button, Input, InvalidText, Spinner } from '../components/UI';
+import useInput from '../hooks/useInput';
+import useFetch from '../hooks/useFetch';
+import { pageMotion } from '../constant/animate';
 
-const isNotEmpty = (value) => value.trim() !== "";
-const emailValidity = (value) => value.includes("@");
+const isNotEmpty = (value) => value.trim() !== '';
+const emailValidity = (value) => value.includes('@');
 const passwordValidity = (value) =>
   /^(?=.*[A-Z])(?=.*\d)[\w@$!%*?&]{1,}$/g.test(value);
 
@@ -58,10 +58,7 @@ const SignIn = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (!formIsValid)
-      return toast.error(
-        "Please fill out the form below and fill in with the valid data"
-      );
+    if (!formIsValid) return;
 
     const signUpData = {
       name: nameValue,
@@ -75,7 +72,7 @@ const SignIn = () => {
 
       if (error) throw Error(data);
 
-      return navigate("/signin");
+      return navigate('/signin');
     } catch (err) {
       console.log(err);
     } finally {
@@ -164,14 +161,15 @@ const SignIn = () => {
                   isPrimary
                   isFull
                   onClick={submitHandler}
+                  disabled={!formIsValid}
                 >
                   <p className="text-base md:text-lg text-white">Sign Up</p>
                 </Button>
                 <p className="text-sm md:text-base text-dark dark:text-light-secondary tracking-wide">
-                  Already have an account?{" "}
+                  Already have an account?{' '}
                   <Link to="/signin" className="text-blue-400 hover:underline">
                     Sign In
-                  </Link>{" "}
+                  </Link>{' '}
                   here
                 </p>
               </div>

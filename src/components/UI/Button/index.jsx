@@ -11,6 +11,7 @@ const Button = ({
   isFull,
   isTransparant,
   onClick,
+  disabled
 }) => {
   const className = [
     "flex flex-row text-sm items-center space-x-1 px-3 py-3 rounded-lg md:text-base md:px-4 justify-center",
@@ -19,14 +20,16 @@ const Button = ({
   isDanger && className.push("bg-red-soft hover:bg-red");
   isTransparant && className.push("bg-transparant hover:text-cyan");
   isFull && className.push("w-full");
+  disabled && className.push("hover:bg-cyan cursor-not-allowed")
 
   return (
     <motion.button
-      whileTap={{ scale: 0.9 }}
+      whileTap={!disabled && { scale: 0.9 }}
       type={type}
       className={className.join(" ")}
       title={title}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </motion.button>
@@ -43,6 +46,7 @@ Button.propTypes = {
   isDanger: PropTypes.bool,
   isTransparant: PropTypes.bool,
   isFull: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 export default React.memo(Button);

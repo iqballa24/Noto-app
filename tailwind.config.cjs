@@ -3,7 +3,7 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ["Nunito", "sans-serif"],
+      sans: ["Poppins", "sans-serif"],
       serif: ["Nunito Sans", "serif"],
     },
     extend: {
