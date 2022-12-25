@@ -58,15 +58,15 @@ const DetailNote = () => {
     >
       <>
         <section className="flex flex-col mt-5 p-5 md:p-10 pb-20 border border-gray-500">
-          <div className="flex justify-end items-center">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl md:text-3xl font-bold py-5 capitalize">
+              {data?.data?.title}
+            </h1>
             <MoreOptions
               onDelete={deleteHandler}
               onArchive={toggleArchiveHandler}
             />
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold py-5 capitalize">
-            {data?.data?.title}
-          </h1>
           <p className="text-xs md:text-sm font-light ">
             {data && formatDate(data?.data?.createdAt)}
           </p>
@@ -79,7 +79,7 @@ const DetailNote = () => {
           {loadingNotes && <Spinner />}
           {isLoading && <Spinner />}
         </section>
-        <div className='mt-5'>
+        <div className="mt-5">
           <Button
             type="button"
             text="back"
