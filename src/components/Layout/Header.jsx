@@ -4,7 +4,7 @@ import { HiOutlineMenuAlt4 } from "react-icons/hi";
 
 const Header = ({ toggleSideNave }) => {
   return (
-    <header className="absolute flex justify-between p-5 w-full shadow-lg bg-transparent z-10 md:hidden text-dark-gray dark:text-white">
+    <header className="absolute flex justify-between p-5 w-full shadow-lg bg-transparent z-10 md:hidden text-dark-gray dark:text-white bg-light-secondary dark:bg-dark-secondary">
       <div className="w-full flex items-center">
         <HiOutlineMenuAlt4
           size={24}

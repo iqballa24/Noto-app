@@ -10,7 +10,7 @@ const MainNavigation = ({ currentLanguage }) => {
     "text-cyan rounded-lg border-b border-cyan bg-cyan text-white dark:bg-gradient-to-r from-[#43444b] to-[#41444e] dark:text-cyan hover:text-white";
 
   return (
-    <ul className="flex flex-col transition-all ease-in">
+    <ul className="flex flex-col transition-all ease-in list-none">
       {menus.map((item) => (
         <li key={item.id} title={item.name[currentLanguage]}>
           <NavLink

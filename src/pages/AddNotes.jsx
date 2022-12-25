@@ -1,30 +1,31 @@
-import React, { useContext, useRef, useState } from "react";
-import { IoChevronBack, IoSave } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { motion } from "framer-motion";
+import React, { useContext, useRef, useState } from 'react';
+import { IoChevronBack, IoSave } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
+import { RichTextEditor } from '@mantine/rte';
 
-import { Button, Spinner } from "../components/UI";
-import WrapperPages from "../components/WrapperPages";
-import ThemeContext from "../store/theme-context";
-import { pageMotion } from "../constant/animate";
-import { buttonLang } from "../constant";
-import useFetch from "../hooks/useFetch";
+import { Button, Spinner } from '../components/UI';
+import WrapperPages from '../components/WrapperPages';
+import ThemeContext from '../store/theme-context';
+import { pageMotion } from '../constant/animate';
+import { buttonLang } from '../constant';
+import useFetch from '../hooks/useFetch';
 
 const AddNote = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { addNotes } = useFetch();
   const navigate = useNavigate();
   const { currentLanguage } = useContext(ThemeContext);
-  const titleRef = useRef("");
-  const bodyRef = useRef("");
+  const titleRef = useRef('');
+  const bodyRef = useRef('');
 
   const changeHandlerValueTitle = (e) => {
     titleRef.current.value = e.target.value;
   };
 
-  const inputHandlerBody = (e) => {
-    bodyRef.current = e.target.innerHTML;
+  const changeHandlerValueContent = (e) => {
+    bodyRef.current = e;
   };
 
   const submitHandler = async (e) => {
@@ -33,8 +34,8 @@ const AddNote = () => {
     const title = titleRef.current.value;
     const body = bodyRef.current;
 
-    if (title === "" || body === "") {
-      return toast.error("please fill out all the blank fields");
+    if (title === '' || body === '') {
+      return toast.error('please fill out all the blank fields');
     }
 
     try {
@@ -43,7 +44,7 @@ const AddNote = () => {
       if (error) {
         throw Error(data);
       }
-      navigate("/active-notes");
+      navigate('/active-notes');
     } catch (err) {
       console.log(err);
     } finally {
@@ -53,7 +54,7 @@ const AddNote = () => {
 
   return (
     <WrapperPages
-      titlePage={currentLanguage === "en" ? "Add Notes" : "Tambahkan Catatan"}
+      titlePage={currentLanguage === 'en' ? 'Add Notes' : 'Tambahkan Catatan'}
     >
       <motion.section
         initial="initial"
@@ -67,21 +68,27 @@ const AddNote = () => {
           type="text"
           className="w-full bg-transparent border-0 text-2xl md:text-3xl focus:outline-none text-center"
           placeholder={
-            currentLanguage === "en" ? "Secret Notes" : "Catatan Rahasia"
+            currentLanguage === 'en' ? 'Secret Notes' : 'Catatan Rahasia'
           }
           onChange={changeHandlerValueTitle}
         />
-        <div
-          className="w-full min-h-[400px] rounded-md text-sm md:text-base border border-dark-secondary dark:border-white p-5"
-          contentEditable
-          onInput={inputHandlerBody}
-        ></div>
+        <RichTextEditor
+          id="rte"
+          onChange={changeHandlerValueContent}
+          className="bg-transparent rounded-md text-sm md:text-base border border-dark-secondary dark:border-white text-dark-secondary dark:text-white"
+          controls={[
+            ['bold', 'italic', 'underline', 'link', 'image'],
+            ['unorderedList', 'h1', 'h2', 'h3'],
+            ['sup', 'sub'],
+            ['alignLeft', 'alignCenter', 'alignRight'],
+          ]}
+        />
         <div className="flex flex-row justify-between items-center px-2">
           <Button
             type="button"
             title={buttonLang.back[currentLanguage]}
             isTransparant
-            onClick={() => navigate("/active-notes")}
+            onClick={() => navigate('/active-notes')}
           >
             <IoChevronBack />
             <p>{buttonLang.back[currentLanguage]}</p>

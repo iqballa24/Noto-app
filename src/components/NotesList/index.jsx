@@ -13,7 +13,7 @@ const NotesList = ({ data, onDelete, onArchive }) => {
           animate="animate"
           exit="exit"
           variants={pageMotion}
-          className="flex flex-row flex-wrap pt-10"
+          className="flex flex-row flex-wrap pt-10 list-none"
         >
           {data.map((item) => (
             <li key={item.id} className="w-full md:w-6/12 xl:w-4/12 mb-5 pr-2">

@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { IoChevronBack } from "react-icons/io5";
-import { Button, MoreOptions, Spinner } from "../components/UI";
-import WrapperPages from "../components/WrapperPages";
-import ThemeContext from "../store/theme-context";
-import { buttonLang } from "../constant";
-import useFetch from "../hooks/useFetch";
-import formatDate from "../utils/formatDate";
+import React, { useContext, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { IoChevronBack } from 'react-icons/io5';
+import { TypographyStylesProvider } from '@mantine/core';
+import { Button, MoreOptions, Spinner } from '../components/UI';
+import WrapperPages from '../components/WrapperPages';
+import ThemeContext from '../store/theme-context';
+import { buttonLang } from '../constant';
+import useFetch from '../hooks/useFetch';
+import formatDate from '../utils/formatDate';
 
 const DetailNote = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const DetailNote = () => {
       if (error) {
         throw Error(data);
       }
-      navigate("/active-notes");
+      navigate('/active-notes');
     } catch (err) {
       console.log(err);
     } finally {
@@ -53,10 +54,32 @@ const DetailNote = () => {
 
   return (
     <WrapperPages
-      titlePage={currentLanguage === "en" ? "Detail Notes" : "Detail Catatan"}
+      titlePage={currentLanguage === 'en' ? 'Detail Notes' : 'Detail Catatan'}
     >
-      <section className="flex flex-col mt-5 p-5 pb-20 border border-gray-500">
-        <div className="flex flex-row justify-between items-center">
+      <>
+        <section className="flex flex-col mt-5 p-5 md:p-10 pb-20 border border-gray-500">
+          <div className="flex justify-end items-center">
+            <MoreOptions
+              onDelete={deleteHandler}
+              onArchive={toggleArchiveHandler}
+            />
+          </div>
+          <h1 className="text-2xl md:text-3xl font-bold py-5 capitalize">
+            {data?.data?.title}
+          </h1>
+          <p className="text-xs md:text-sm font-light ">
+            {data && formatDate(data?.data?.createdAt)}
+          </p>
+          <TypographyStylesProvider>
+            <div
+              className="pt-7 text-dark-secondary dark:text-white"
+              dangerouslySetInnerHTML={{ __html: data?.data?.body }}
+            />
+          </TypographyStylesProvider>
+          {loadingNotes && <Spinner />}
+          {isLoading && <Spinner />}
+        </section>
+        <div className='mt-5'>
           <Button
             type="button"
             text="back"
@@ -67,23 +90,8 @@ const DetailNote = () => {
             <IoChevronBack />
             <p>{buttonLang.back[currentLanguage]}</p>
           </Button>
-          <MoreOptions
-            onDelete={deleteHandler}
-            onArchive={toggleArchiveHandler}
-          />
         </div>
-        <h1 className="text-2xl md:text-3xl font-bold py-5 capitalize">
-          {data?.data?.title}
-        </h1>
-        <p className="text-xs md:text-sm font-light ">
-          {data && formatDate(data?.data?.createdAt)}
-        </p>
-        <p className="text-sm md:text-base pt-7  leading-7">
-          {data?.data?.body}
-        </p>
-        {loadingNotes && <Spinner />}
-        {isLoading && <Spinner />}
-      </section>
+      </>
     </WrapperPages>
   );
 };

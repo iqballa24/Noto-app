@@ -1,13 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { MoreOptions } from "../UI";
-import formatDate from "../../utils/formatDate";
-import truncateText from "../../utils/truncateText";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { TypographyStylesProvider } from '@mantine/core';
+import { MoreOptions } from '../UI';
+import formatDate from '../../utils/formatDate';
 
 const NoteItem = ({ id, title, body, createdAt, onDelete, onArchive }) => {
   const createdDate = formatDate(createdAt);
-  const bodyTruncate = truncateText(body, 150);
 
   return (
     <div className="relative flex flex-col bg-white min-h-full dark:bg-dark p-5 rounded-lg md:p-8 hover:border hover:border-cyan">
@@ -23,9 +22,12 @@ const NoteItem = ({ id, title, body, createdAt, onDelete, onArchive }) => {
           onArchive={() => onArchive(id)}
         />
       </div>
-      <p className="text-sm md:text-base text-light-gray mb-8 max-h-28 overflow-hidden">
-        {bodyTruncate}
-      </p>
+      <TypographyStylesProvider>
+        <div
+          className="text-sm md:text-base text-light-gray mb-8 max-h-28 truncate"
+          dangerouslySetInnerHTML={{ __html: body }}
+        />
+      </TypographyStylesProvider>
       <p className="text-xs md:text-sm flex flex-auto justify-end items-end">
         {createdDate}
       </p>

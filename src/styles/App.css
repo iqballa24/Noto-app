@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&family=Nunito:wght@300;400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&family=Nunito:wght@300;400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,10 +25,15 @@ header {
 }
 
 body {
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
   background-color: var(--background-color);
   color: var(--font-color);
   overflow: hidden;
+}
+
+ul {
+  list-style: square;
+  list-style-position: inside;
 }
 
 #root {
@@ -36,6 +41,19 @@ body {
   display: flex;
   flex-direction: row;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+.ql-toolbar {
+  background-color: var(--background-color);
+}
+
+.mantine-RichTextEditor-toolbarControl {
+  color: var(--font-color);
+}
+
+.mantine-RichTextEditor-toolbarControl:hover {
+  @apply text-cyan;
 }
