@@ -13,6 +13,8 @@ API.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       window.location.href = '/';
+    } else {
+      return error.response;
     }
   }
 );
